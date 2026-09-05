@@ -45,7 +45,11 @@ async function loadComponent(placeholderId, componentPath) {
 
 // Highlight the navigation link for the current page
 function setActiveNavLink() {
-    const currentPage = window.location.pathname.split("/").pop();
+    let currentPage = window.location.pathname.split("/").pop();
+
+    if (!currentPage) {
+        currentPage = "index.html";
+    }
 
     const navLinks = document.querySelectorAll(".navbar .nav-link");
 
@@ -82,6 +86,8 @@ function setActiveNavLink() {
 document.addEventListener("DOMContentLoaded", async () => {
     await loadComponent("navbar-placeholder", "components/navbar.html");
     setActiveNavLink();
-    //await loadComponent("footer-placeholder", "components/footer.html");
+    
+    await loadComponent("footer-placeholder", "components/footer.html");
+    
     //await loadPageHeader();
 });
